@@ -4,9 +4,10 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('chatops-k8s:server');
-var http = require('http');
+import app from '../app.js';
+import _debugger from 'debug';
+const debug = _debugger('chatops-k8s:server');
+import http from 'http';
 
 /**
  * Get port from environment and store in Express.
@@ -65,7 +66,7 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(bind + ' requires elevated privileges');
+      console.error(bind + ' imports elevated privileges');
       process.exit(1);
       break;
     case 'EADDRINUSE':
@@ -86,5 +87,5 @@ function onListening() {
   var bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  debug('Listening on ' + bind);
+  console.log('Listening on ' + bind);
 }

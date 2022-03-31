@@ -2,8 +2,9 @@
   "name": "chatops-k8s",
   "version": "0.0.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node bin/www.js"
   },
   "dependencies": {
     "@kubernetes/client-node": "^0.16.3",
