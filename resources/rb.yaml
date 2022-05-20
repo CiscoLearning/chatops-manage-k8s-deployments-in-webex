@@ -1,0 +1,13 @@
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: chatops-admin-binding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: chatops-bot
+  apiGroup: ""
+roleRef:
+  kind: Role
+  name: chatops-admin
+  apiGroup: ""
