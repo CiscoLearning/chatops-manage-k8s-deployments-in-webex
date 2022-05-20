@@ -1,4 +1,3 @@
-import {LocalKubeConfig} from "../config/LocalKubeConfig.js";
 import {Notification} from "../dto/Notification.js"
 import {KubeConfig, AppsV1Api, PatchUtils} from '@kubernetes/client-node';
 
@@ -11,9 +10,21 @@ export class KubernetesService {
     }
 
     _initAppClient(appConfig) {
-        const localConfig = new LocalKubeConfig(appConfig);
+        // building objects from the env vars we pulled in
+        const cluster = {
+            name: appConfig.clusterName,
+            server: appConfig.clusterUrl,
+            caData: appConfig.clusterCert
+        };
+        const user = {
+            name: appConfig.kubernetesUserame,
+            token: appConfig.kubernetesToken,
+        };
+        // create a new config factory object
         const kc = new KubeConfig();
-        kc.loadFromClusterAndUser(localConfig.cluster, localConfig.user);
+        // pass in our cluster and user objects
+        kc.loadFromClusterAndUser(cluster, user);
+        // return the client created by the factory object
         return kc.makeApiClient(AppsV1Api);
     }
 
@@ -49,7 +60,6 @@ export class KubernetesService {
         ];
         // call the K8s API with a PATCH request
         const res = await this.appClient.patchNamespacedDeployment(k8sCommand.deploymentName, this.namespace, patch, undefined, undefined, undefined, undefined, this.requestOptions);
-        console.log(res.body);
     }
 
     async _updateDeploymentScale(k8sCommand) {
@@ -69,7 +79,6 @@ export class KubernetesService {
 
     _validateScaleResponse(k8sCommand, template) {
         try {
-            console.log(template);
             if (template.spec.replicas === k8sCommand.scaleTarget) {
                 return new Notification({
                     success: true,
@@ -77,7 +86,7 @@ export class KubernetesService {
                 });
             } else {
                 return new Notification({
-                    success: true,
+                    success: false,
                     message: `The Kubernetes API returned a replica count of ${template.spec.replicas}, which does not match the desired ${k8sCommand.scaleTarget}`
                 });
             }

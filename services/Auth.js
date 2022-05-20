@@ -1,6 +1,5 @@
 import crypto from "crypto";
 
-
 export class Auth {
     constructor(appConfig) {
         this.encryptionSecret = appConfig.encryptionSecret;

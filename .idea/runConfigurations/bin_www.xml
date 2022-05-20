@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="bin/www" type="NodeJSConfigurationType" node-parameters="--experimental-fetch" path-to-js-file="bin/www.js" working-dir="$PROJECT_DIR$">
+  <configuration default="false" name="bin/www" type="NodeJSConfigurationType" path-to-node="/usr/local/bin/node" node-parameters="--experimental-fetch" path-to-js-file="bin/www.js" working-dir="$PROJECT_DIR$">
     <envs>
       <env name="DEBUG" value="chatops-k8s:*" />
       <env name="CLUSTER_NAME" value="development" />
@@ -12,7 +12,7 @@
       <env name="WEBEX_DOMAIN" value="webexapis.com" />
       <env name="WEBEX_MESSAGE_PATH" value="/v1/messages/" />
       <env name="WEBEX_BOT_ID" value="Y2lzY29zcGFyazovL3VzL1BFT1BMRS85ZjhjYzM1NC1jNDk2LTRkNTItYmNiNy02NDM5ZWJhNzk0NDY" />
-      <env name="WEBEX_ENCRYPTION_SECRET" value="thisthat" />
+      <env name="WEBEX_ENCRYPTION_SECRET" value="WDbwokzf6Kncxn3GjEM1f5ZHsNvLZO" />
       <env name="WEBEX_ENCRYPTION_ALGO" value="sha1" />
       <env name="WEBEX_ENCRYPTION_HEADER" value="x-spark-signature" />
       <env name="WEBEX_BOT_NAME" value="Kubernetes" />

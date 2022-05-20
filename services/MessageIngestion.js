@@ -6,11 +6,8 @@ export class MessageIngestion {
             DEPLOYMENT: "deploy",
             SCALE: "scale"
         };
-        this.botId = appConfig.botId;
         this.botName = appConfig.botName;
         this.botToken = appConfig.botToken;
-        this.domain = appConfig.webexDomain;
-        this.messagePath = appConfig.webexMessagePath;
     }
 
     async determineCommand(event) {
@@ -19,7 +16,7 @@ export class MessageIngestion {
     }
 
     async _fetchMessage(event) {
-        const res = await fetch("https://" + this.domain + this.messagePath + "/" + event.data.id, {
+        const res = await fetch("https://webexapis.com/v1/messages/" + event.data.id, {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${this.botToken}`

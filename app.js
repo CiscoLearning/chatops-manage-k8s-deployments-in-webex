@@ -8,7 +8,7 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// add the auth/authz check
+// add the authentication check
 app.use(authRouter);
 
 // message ingestion and K8s interaction
